@@ -1,0 +1,7 @@
+# RPC
+
+This module contains example application which leverages RPC over the RSocket with Protobuf as a serialization mechanism
+The RPC interface definition and transport objects are are defined in `service.proto` file. 
+In order to generate required classes please use `gradle clean build` or `generateProto` command.
+
+
