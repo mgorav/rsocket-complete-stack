@@ -1,9 +1,9 @@
-# RSocket Examples
+# RSocket Complete Stack
 
 
 ## Introduction
 
-This repository contains examples used in the series of articles about RSocket. The articles are available here: https://medium.com/@b3rnoulli/reactive-service-to-service-communication-with-rsocket-introduction-5d64e5b6909
+This repository contains architectural patterns implemented using RSocket.
 
 It consist of following modules:
 - interaction-model
@@ -21,4 +21,4 @@ The modules use ```gradle``` as a build tool. In order to crate executable jars 
 `./gradlew clean build` on the root directory. Each module can be built individually using the same command, 
 but executed in the particular module directory.
 
-NOTE: These ere designed to run from IDE.
+NOTE: These modules are designed to run from IDE.
