@@ -31,22 +31,22 @@ public class RSocketResponderApplication {
         private final List<String> RANDOM_NAMES = Arrays.asList("Gaurav", "Aarika", "Naman", "Shikha", "Saurabh", "Shalu");
 
         @MessageMapping("person")
-        CustomerResponse getCustomer(CustomerRequest customerRequest) {
-            return new CustomerResponse(customerRequest.getId(), getRandomName());
+        PersonResponse getCustomer(PersonRequest personRequest) {
+            return new PersonResponse(personRequest.getId(), getRandomName());
         }
 
         @MessageMapping("customer-stream")
-        Flux<CustomerResponse> getCustomers(MultipleCustomersRequest multipleCustomersRequest) {
-            return Flux.range(0, multipleCustomersRequest.getIds().size())
+        Flux<PersonResponse> getCustomers(MultiplePersonsRequest multiplePersonsRequest) {
+            return Flux.range(0, multiplePersonsRequest.getIds().size())
                     .delayElements(Duration.ofMillis(500))
-                    .map(i -> new CustomerResponse(multipleCustomersRequest.getIds().get(i), getRandomName()));
+                    .map(i -> new PersonResponse(multiplePersonsRequest.getIds().get(i), getRandomName()));
         }
 
         @MessageMapping("customer-channel")
-        Flux<CustomerResponse> getCustomersChannel(Flux<CustomerRequest> requests) {
+        Flux<PersonResponse> getCustomersChannel(Flux<PersonRequest> requests) {
             return Flux.from(requests)
                     .doOnNext(message -> log.info("Received 'customerChannel' request [{}]", message))
-                    .map(message -> new CustomerResponse(message.getId(), getRandomName()));
+                    .map(message -> new PersonResponse(message.getId(), getRandomName()));
         }
 
         private String getRandomName() {
@@ -56,26 +56,26 @@ public class RSocketResponderApplication {
 }
 @Getter
 @ToString
-class CustomerRequest {
+class PersonRequest {
     private String id;
 
-    public CustomerRequest() {
+    public PersonRequest() {
     }
 
-    CustomerRequest(String id) {
+    PersonRequest(String id) {
         this.id = id;
     }
 }
 
 @Getter
 @ToString
-class MultipleCustomersRequest {
+class MultiplePersonsRequest {
     private List<String> ids;
 
-    public MultipleCustomersRequest() {
+    public MultiplePersonsRequest() {
     }
 
-    MultipleCustomersRequest(List<String> ids) {
+    MultiplePersonsRequest(List<String> ids) {
         this.ids = ids;
     }
 }
@@ -83,16 +83,16 @@ class MultipleCustomersRequest {
 
 @Getter
 @ToString
-class CustomerResponse {
+class PersonResponse {
 
     private String id;
 
     private String name;
 
-    public CustomerResponse() {
+    public PersonResponse() {
     }
 
-    CustomerResponse(String id, String name) {
+    PersonResponse(String id, String name) {
         this.id = id;
         this.name = name;
     }
