@@ -56,29 +56,29 @@ public class RSocketRequesterApplication {
     }
 
     @RestController
-    class CustomerController {
+    class PersonController {
 
-        private final CustomerServiceAdapter customerServiceAdapter;
+        private final PersonServiceAdapter personServiceAdapter;
 
 
-        CustomerController(CustomerServiceAdapter customerServiceAdapter) {
-            this.customerServiceAdapter = customerServiceAdapter;
+        PersonController (PersonServiceAdapter personServiceAdapter) {
+            this.personServiceAdapter = personServiceAdapter;
         }
 
-        @GetMapping("/customers/{id}")
-        Mono<CustomerResponse> getCustomer(@PathVariable String id) {
-            return customerServiceAdapter.getCustomer(id);
+        @GetMapping("/p[ersons/{id}")
+        Mono<PersonResponse> getCustomer(@PathVariable String id) {
+            return personServiceAdapter.getPerson(id);
         }
 
-        @GetMapping(value = "/customers", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-        Publisher<CustomerResponse> getCustomers() {
-            return customerServiceAdapter.getCustomers(getRandomIds(10));
+        @GetMapping(value = "/persons", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+        Publisher<PersonResponse> getCustomers() {
+            return personServiceAdapter.getPersons(getRandomIds(10));
         }
 
-        @GetMapping(value = "/customers-channel", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-        Publisher<CustomerResponse> getCustomersChannel() {
-            return customerServiceAdapter.getCustomerChannel(Flux.interval(Duration.ofMillis(1000))
-                    .map(id -> new CustomerRequest(UUID.randomUUID().toString())));
+        @GetMapping(value = "/persons-channel", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+        Publisher<PersonResponse> getCustomersChannel() {
+            return personServiceAdapter.getPersonChannel(Flux.interval(Duration.ofMillis(1000))
+                    .map(id -> new PersonRequest(UUID.randomUUID().toString())));
         }
 
         private List<String> getRandomIds(int amount) {
@@ -90,62 +90,62 @@ public class RSocketRequesterApplication {
     }
 
     @Component
-    class CustomerServiceAdapter {
+    class PersonServiceAdapter {
 
         private final RSocketRequester rSocketRequester;
 
-        CustomerServiceAdapter(RSocketRequester rSocketRequester) {
+        PersonServiceAdapter(RSocketRequester rSocketRequester) {
             this.rSocketRequester = rSocketRequester;
         }
 
-        Mono<CustomerResponse> getCustomer(String id) {
+        Mono<PersonResponse> getPerson(String id) {
             return rSocketRequester
                     .route("customer")
-                    .data(new CustomerRequest(id))
-                    .retrieveMono(CustomerResponse.class)
-                    .doOnNext(customerResponse -> log.info("Received customer as mono [{}]", customerResponse));
+                    .data(new PersonRequest(id))
+                    .retrieveMono(PersonResponse.class)
+                    .doOnNext(personResponse -> log.info("Received customer as mono [{}]", personResponse));
         }
 
-        Flux<CustomerResponse> getCustomers(List<String> ids) {
+        Flux<PersonResponse> getPersons(List<String> ids) {
             return rSocketRequester
                     .route("customer-stream")
-                    .data(new MultipleCustomersRequest(ids))
-                    .retrieveFlux(CustomerResponse.class)
-                    .doOnNext(customerResponse -> log.info("Received customer as flux [{}]", customerResponse));
+                    .data(new MultiplePersonsRequest(ids))
+                    .retrieveFlux(PersonResponse.class)
+                    .doOnNext(personResponse -> log.info("Received customer as flux [{}]", personResponse));
         }
 
-        Flux<CustomerResponse> getCustomerChannel(Flux<CustomerRequest> customerRequestFlux) {
+        Flux<PersonResponse> getPersonChannel(Flux<PersonRequest> customerRequestFlux) {
             return rSocketRequester
                     .route("customer-channel")
-                    .data(customerRequestFlux, CustomerRequest.class)
-                    .retrieveFlux(CustomerResponse.class)
-                    .doOnNext(customerResponse -> log.info("Received customer as flux [{}]", customerResponse));
+                    .data(customerRequestFlux, PersonRequest.class)
+                    .retrieveFlux(PersonResponse.class)
+                    .doOnNext(personResponse -> log.info("Received customer as flux [{}]", personResponse));
         }
     }
 
 }
 @Getter
 @ToString
-class CustomerRequest {
+class PersonRequest {
     private String id;
 
-    public CustomerRequest() {
+    public PersonRequest() {
     }
 
-    CustomerRequest(String id) {
+    PersonRequest(String id) {
         this.id = id;
     }
 }
 
 @Getter
 @ToString
-class MultipleCustomersRequest {
+class MultiplePersonsRequest {
     private List<String> ids;
 
-    public MultipleCustomersRequest() {
+    public MultiplePersonsRequest() {
     }
 
-    MultipleCustomersRequest(List<String> ids) {
+    MultiplePersonsRequest(List<String> ids) {
         this.ids = ids;
     }
 }
@@ -153,16 +153,16 @@ class MultipleCustomersRequest {
 
 @Getter
 @ToString
-class CustomerResponse {
+class PersonResponse {
 
     private String id;
 
     private String name;
 
-    public CustomerResponse() {
+    public PersonResponse() {
     }
 
-    CustomerResponse(String id, String name) {
+    PersonResponse(String id, String name) {
         this.id = id;
         this.name = name;
     }
