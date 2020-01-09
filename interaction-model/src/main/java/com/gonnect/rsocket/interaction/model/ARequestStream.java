@@ -12,7 +12,7 @@ import org.reactivestreams.Subscription;
 import static com.gonnect.rsocket.interaction.model.Server.HOST;
 import static com.gonnect.rsocket.interaction.model.Server.PORT;
 
-public class RequestStream {
+public class ARequestStream {
 
     public static void main(String[] args) {
 

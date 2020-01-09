@@ -7,7 +7,7 @@ import reactor.core.publisher.Flux;
 
 import java.time.Duration;
 
-public class Channel {
+public class AChannel {
 
     public static void main(String[] args) {
         RSocketFactory.connect()

@@ -8,7 +8,7 @@ import io.rsocket.util.DefaultPayload;
 import static com.gonnect.rsocket.interaction.model.Server.HOST;
 import static com.gonnect.rsocket.interaction.model.Server.PORT;
 
-public class FireAndForget {
+public class FireAndForgetPattern {
 
     public static void main(String[] args) {
         RSocket socket = RSocketFactory.connect()

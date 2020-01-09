@@ -10,7 +10,7 @@ import static com.gonnect.rsocket.interaction.model.Server.HOST;
 import static com.gonnect.rsocket.interaction.model.Server.PORT;
 
 @Slf4j
-public class RequestResponse {
+public class RequestResponsePattern {
 
     public static void main(String[] args) {
         RSocket socket = RSocketFactory.connect().transport(TcpClientTransport.create(HOST, PORT))
