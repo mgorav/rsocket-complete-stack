@@ -30,19 +30,19 @@ public class RSocketResponderApplication {
 
         private final List<String> RANDOM_NAMES = Arrays.asList("Gaurav", "Aarika", "Naman", "Shikha", "Saurabh", "Shalu");
 
-        @MessageMapping("person")
-        PersonResponse getCustomer(PersonRequest personRequest) {
+        @MessageMapping("persons")
+        PersonResponse getPerson(PersonRequest personRequest) {
             return new PersonResponse(personRequest.getId(), getRandomName());
         }
 
-        @MessageMapping("person-stream")
-        Flux<PersonResponse> getCustomers(MultiplePersonsRequest multiplePersonsRequest) {
+        @MessageMapping("persons-stream")
+        Flux<PersonResponse> getPersons(MultiplePersonsRequest multiplePersonsRequest) {
             return Flux.range(0, multiplePersonsRequest.getIds().size())
                     .delayElements(Duration.ofMillis(500))
                     .map(i -> new PersonResponse(multiplePersonsRequest.getIds().get(i), getRandomName()));
         }
 
-        @MessageMapping("person-channel")
+        @MessageMapping("persons-channel")
         Flux<PersonResponse> getCustomersChannel(Flux<PersonRequest> requests) {
             return Flux.from(requests)
                     .doOnNext(message -> log.info("Received 'personChannel' request [{}]", message))
