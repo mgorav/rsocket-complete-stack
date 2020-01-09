@@ -5,8 +5,8 @@ import io.rsocket.RSocketFactory;
 import io.rsocket.transport.netty.client.TcpClientTransport;
 import io.rsocket.util.DefaultPayload;
 
-import static com.gonnect.rsocket.interaction.model.Server.HOST;
-import static com.gonnect.rsocket.interaction.model.Server.PORT;
+import static com.gonnect.rsocket.interaction.model.RSocketServer.HOST;
+import static com.gonnect.rsocket.interaction.model.RSocketServer.PORT;
 
 public class FireAndForgetPattern {
 

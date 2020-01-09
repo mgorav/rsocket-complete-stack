@@ -9,7 +9,7 @@ import reactor.core.publisher.Mono;
 import java.util.Arrays;
 
 @Slf4j
-public class MultipleServers {
+public class MultiplexServer {
 
     static final String HOST = "localhost";
     static final int[] PORTS = new int[]{7000, 7001, 7002};

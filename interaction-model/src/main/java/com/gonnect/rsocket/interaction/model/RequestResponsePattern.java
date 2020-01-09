@@ -6,8 +6,8 @@ import io.rsocket.transport.netty.client.TcpClientTransport;
 import io.rsocket.util.DefaultPayload;
 import lombok.extern.slf4j.Slf4j;
 
-import static com.gonnect.rsocket.interaction.model.Server.HOST;
-import static com.gonnect.rsocket.interaction.model.Server.PORT;
+import static com.gonnect.rsocket.interaction.model.RSocketServer.HOST;
+import static com.gonnect.rsocket.interaction.model.RSocketServer.PORT;
 
 @Slf4j
 public class RequestResponsePattern {

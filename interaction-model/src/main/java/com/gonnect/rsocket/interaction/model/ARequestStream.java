@@ -9,8 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 
-import static com.gonnect.rsocket.interaction.model.Server.HOST;
-import static com.gonnect.rsocket.interaction.model.Server.PORT;
+import static com.gonnect.rsocket.interaction.model.RSocketServer.HOST;
+import static com.gonnect.rsocket.interaction.model.RSocketServer.PORT;
 
 public class ARequestStream {
 

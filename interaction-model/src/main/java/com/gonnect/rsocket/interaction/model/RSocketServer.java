@@ -13,7 +13,7 @@ import java.time.Duration;
 import java.time.Instant;
 
 @Slf4j
-public class Server {
+public class RSocketServer {
 
     static final String HOST = "localhost";
     static final int PORT = 7000;
@@ -25,7 +25,7 @@ public class Server {
                 .transport(TcpServerTransport.create(HOST, PORT))
                 .start()
                 .subscribe();
-        log.info("Server running");
+        log.info("RSocketServer running");
 
         Thread.currentThread().join();
     }

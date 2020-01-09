@@ -14,10 +14,10 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.gonnect.rsocket.example.loadbalancing.MultipleServers.HOST;
+import static com.gonnect.rsocket.example.loadbalancing.MultiplexServer.HOST;
 
 @Slf4j
-public class LoadBalancedClient {
+public class LoadBalancerClient {
 
     static final int[] PORTS = new int[]{7000, 7001, 7002};
 

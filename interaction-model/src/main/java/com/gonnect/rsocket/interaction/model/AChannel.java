@@ -11,7 +11,7 @@ public class AChannel {
 
     public static void main(String[] args) {
         RSocketFactory.connect()
-                .transport(TcpClientTransport.create(Server.HOST, Server.PORT))
+                .transport(TcpClientTransport.create(RSocketServer.HOST, RSocketServer.PORT))
                 .start()
                 .block()
                 .requestChannel(Flux.interval(Duration.ofMillis(100))
