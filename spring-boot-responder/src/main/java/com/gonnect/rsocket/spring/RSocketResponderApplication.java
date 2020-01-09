@@ -28,9 +28,9 @@ public class RSocketResponderApplication {
     @Controller
     public class CustomerController {
 
-        private final List<String> RANDOM_NAMES = Arrays.asList("Andrew", "Joe", "Matt", "Rachel", "Robin", "Jack");
+        private final List<String> RANDOM_NAMES = Arrays.asList("Gaurav", "Aarika", "Naman", "Shikha", "Saurabh", "Shalu");
 
-        @MessageMapping("customer")
+        @MessageMapping("person")
         CustomerResponse getCustomer(CustomerRequest customerRequest) {
             return new CustomerResponse(customerRequest.getId(), getRandomName());
         }
