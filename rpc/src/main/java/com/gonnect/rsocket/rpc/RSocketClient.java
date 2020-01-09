@@ -11,7 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.UUID;
 
 @Slf4j
-public class Client {
+public class RSocketClient {
 
     public static void main(String[] args) {
         RSocket rSocket = RSocketFactory

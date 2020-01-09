@@ -15,7 +15,7 @@ import java.time.Duration;
 import java.util.*;
 
 @Slf4j
-public class Server {
+public class RSocketServer {
 
     public static void main(String[] args) throws InterruptedException {
 
