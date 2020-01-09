@@ -103,7 +103,7 @@ public class RSocketRequesterApplication {
                     .route("customer")
                     .data(new PersonRequest(id))
                     .retrieveMono(PersonResponse.class)
-                    .doOnNext(personResponse -> log.info("Received customer as mono [{}]", personResponse));
+                    .doOnNext(personResponse -> log.info("Received person as mono [{}]", personResponse));
         }
 
         Flux<PersonResponse> getPersons(List<String> ids) {
@@ -111,7 +111,7 @@ public class RSocketRequesterApplication {
                     .route("customer-stream")
                     .data(new MultiplePersonsRequest(ids))
                     .retrieveFlux(PersonResponse.class)
-                    .doOnNext(personResponse -> log.info("Received customer as flux [{}]", personResponse));
+                    .doOnNext(personResponse -> log.info("Received person as flux [{}]", personResponse));
         }
 
         Flux<PersonResponse> getPersonChannel(Flux<PersonRequest> customerRequestFlux) {
@@ -119,7 +119,7 @@ public class RSocketRequesterApplication {
                     .route("customer-channel")
                     .data(customerRequestFlux, PersonRequest.class)
                     .retrieveFlux(PersonResponse.class)
-                    .doOnNext(personResponse -> log.info("Received customer as flux [{}]", personResponse));
+                    .doOnNext(personResponse -> log.info("Received person as flux [{}]", personResponse));
         }
     }
 
