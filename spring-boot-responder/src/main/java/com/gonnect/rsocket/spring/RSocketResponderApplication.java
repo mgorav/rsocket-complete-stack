@@ -26,7 +26,7 @@ public class RSocketResponderApplication {
     }
 
     @Controller
-    public class CustomerController {
+    public class PersonController {
 
         private final List<String> RANDOM_NAMES = Arrays.asList("Gaurav", "Aarika", "Naman", "Shikha", "Saurabh", "Shalu");
 
@@ -35,17 +35,17 @@ public class RSocketResponderApplication {
             return new PersonResponse(personRequest.getId(), getRandomName());
         }
 
-        @MessageMapping("customer-stream")
+        @MessageMapping("person-stream")
         Flux<PersonResponse> getCustomers(MultiplePersonsRequest multiplePersonsRequest) {
             return Flux.range(0, multiplePersonsRequest.getIds().size())
                     .delayElements(Duration.ofMillis(500))
                     .map(i -> new PersonResponse(multiplePersonsRequest.getIds().get(i), getRandomName()));
         }
 
-        @MessageMapping("customer-channel")
+        @MessageMapping("person-channel")
         Flux<PersonResponse> getCustomersChannel(Flux<PersonRequest> requests) {
             return Flux.from(requests)
-                    .doOnNext(message -> log.info("Received 'customerChannel' request [{}]", message))
+                    .doOnNext(message -> log.info("Received 'personChannel' request [{}]", message))
                     .map(message -> new PersonResponse(message.getId(), getRandomName()));
         }
 
